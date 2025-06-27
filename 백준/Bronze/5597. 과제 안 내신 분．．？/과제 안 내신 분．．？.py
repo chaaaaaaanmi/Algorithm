@@ -1,13 +1,6 @@
-students = list(range(1, 31))
-arr = [int(input()) for _ in range(28)]
+students = set(range(1, 31))
+submit = set([int(input()) for _ in range(28)])
 
-for i in arr:
-    if i in students:
-        students.pop(students.index(i))
-
-if students[0] > students[1]:
-    print(students[1])
-    print(students[0])
-else:
-    print(students[0])
-    print(students[1])
+result = sorted(students - submit)
+print(result[0])
+print(result[1])
