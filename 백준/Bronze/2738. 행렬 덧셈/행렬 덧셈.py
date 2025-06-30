@@ -7,7 +7,5 @@ for i in range(n):
     for j in range(m):
         result[i][j] = A[i][j] + B[i][j]
 
-for i in range(n):
-    for j in range(m):
-        print(result[i][j], end=" ")
-    print()
+for r in result:
+    print(*r)
