@@ -1,34 +1,40 @@
+from collections import deque
+
+def bfs(start):
+    q = deque([start])
+    
+    visited[start] = 1
+
+    while q:
+        n = q.popleft()
+
+        # 1이 되면 종료
+        if n == 1:
+            break
+
+        for next in [n-1,
+                     n//3 if n % 3 == 0 else -1,
+                     n//2 if n % 2 == 0 else -1]:
+            # 방문한적 없다면 q에 추가하고 방문체크
+            if next >= 1 and next <= start and not visited[next]:
+                visited[next] = 1
+                dist[next] = dist[n] + 1
+                path[next] = n
+                q.append(next)
+
 x = int(input())
+visited = [0] * (x+1)
+dist = [0] * (x+1) # 최소 연산 횟수
+path = [0] * (x+1) # 경로 저장
+bfs(x)
 
-dp = [0] * (x+1)
-dp[1] = 0
-if x >= 2: dp[2] = 1
-if x >= 3: dp[3] = 1
+print(dist[1])
 
-nums = [[] for _ in range(x+1)]
-nums[1] = [1]
-if x >= 2: nums[2] = [2, 1]
-if x >= 3: nums[3] = [3, 1]
+# 경로 역추적
+current = 1
+result_path = []
+while current != 0:
+    result_path.append(current)
+    current = path[current]
 
-for i in range(4, x+1):
-
-    # 1 빼보기
-    dp[i] = 1 + dp[i-1]
-    nums[i] = [i] + nums[i-1]
-
-    # 3 나눠보기
-    if (i % 3 == 0):
-        # 더 작을 때만 갱신
-        if (dp[i] > 1 + dp[i//3]):
-            dp[i] = 1 + dp[i//3]
-            nums[i] = [i] + nums[i//3]
-
-    # 2 나눠보기
-    if (i % 2 == 0):
-        # 더 작을 때만 갱신
-        if (dp[i] > 1 + dp[i//2]):
-            dp[i] = 1 + dp[i//2]
-            nums[i] = [i] + nums[i//2]
-
-print(dp[x])
-print(*nums[x])
+print(*result_path[::-1])
