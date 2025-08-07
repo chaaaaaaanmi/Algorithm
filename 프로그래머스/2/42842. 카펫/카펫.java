@@ -5,11 +5,11 @@ class Solution {
         int total = brown + yellow;
         
         // 가로, 세로 최소 길이는 3
-        for (int r = 3; r <= total; r++) {
-            for (int c = 3; c <= total; c++) {
+        for (int c = 3; c <= total; c++) {
+            for (int r = 3; r <= total; r++) {
                 if ((r-2)*(c-2) == yellow &&
                    (r*2)+(2*(c-2)) == brown) {
-                    return new int[]{c,r};
+                    return new int[]{r, c};
 
                 }
             }
