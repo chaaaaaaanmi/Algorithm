@@ -4,7 +4,9 @@ MAP = [list(map(int, input().split())) for _ in range(n)]
 
 time = 500 * 500 * 256 * 2
 height = 0
-for h in range(0, 257):
+min_h = min(map(min, MAP))
+max_h = max(map(max, MAP))
+for h in range(min_h, max_h+1):
     need = 0
     remove = 0
 
