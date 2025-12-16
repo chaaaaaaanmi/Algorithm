@@ -10,16 +10,10 @@ def solve(num, cnt):
         return
 
     # 2 곱하기
-    next = num * 2
-    solve(next, cnt+1)
-    # 복구
-    next = num // 2
+    solve(num*2, cnt+1)
     
     # 오른쪽에 1 추가하기
-    next = (num * 10) + 1
-    solve(next, cnt+1)
-    # 복구
-    next = (num - 1) // 10
+    solve((num*10)+1, cnt+1)
 
 
 
